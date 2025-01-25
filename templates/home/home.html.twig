@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block title %}{% endblock %}
+
+{% block body %}
+     <header>
+        <h1>Seja Bem-Vindo</h1>
+        <p>Esse menu serve para você realizar matrículas, cadastrar cursos e também para cadastrar alunos no sistema</p>
+    </header>
+
+    <nav>
+        {% for category in categories %}
+            <a href="{{ path('app_index') }}">{{ category.title }}</a>
+        {% endfor %}
+        
+    </nav>
+
+
+   
+{% endblock %}
