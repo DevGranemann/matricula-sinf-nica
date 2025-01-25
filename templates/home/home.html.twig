@@ -8,12 +8,13 @@
     </header>
 
     <nav>
-        {% for category in categories %}
-            <a href="{{ path('app_index') }}">{{ category.title }}</a>
-        {% endfor %}
-        
+        <ul>
+            <li><a href="{{ path('app_index') }}">Matricular aluno</a></li>
+            <li><a href="{{ path('app_index') }}">Cadastrar Cursp</a></li>
+            <li><a href="{{ path('app_index') }}" >Cadastrar Aluno</a></li>
+            
+        </ul>
     </nav>
 
-
-   
+ 
 {% endblock %}

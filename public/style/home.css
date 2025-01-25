@@ -41,11 +41,12 @@ a {
     color: #ffffff;
     background-color: #007bff;
     padding: 10px 20px;
-    margin: 10px 5px;
+    margin: 20px 10px;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     transition: background-color 0.3s, transform 0.2s;
+    marker: none;
 }
 
 a:hover {
@@ -57,3 +58,13 @@ a:hover {
 a + a {
     margin-left: 10px;
 }
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+
+
+}
+
+
