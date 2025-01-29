@@ -2,19 +2,13 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-     <header>
-        <h1>Seja Bem-Vindo</h1>
-        <p>Esse menu serve para você realizar matrículas, cadastrar cursos e também para cadastrar alunos no sistema</p>
-    </header>
-
-    <nav>
-        <ul>
-            <li><a href="{{ path('app_index') }}">Matricular aluno</a></li>
-            <li><a href="{{ path('app_index') }}">Cadastrar Cursp</a></li>
-            <li><a href="{{ path('app_index') }}" >Cadastrar Aluno</a></li>
-            
-        </ul>
-    </nav>
-
- 
+    <div>
+        <nav>
+            <ul>
+                <a class="aluno" href="{{ path('app_aluno') }}">Aluno</a>
+                
+            </ul>
+        </nav>
+    </div>
 {% endblock %}
+
