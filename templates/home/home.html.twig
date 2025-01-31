@@ -1,11 +1,21 @@
 {% extends 'base.html.twig' %}
 {% block title %}{% endblock %}
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="{{ asset('style/home.css') }}">
+
+{% endblock %}
+    
 
 {% block body %}
     <div>
         <nav>
             <ul>
-                <a class="aluno" href="{{ path('app_aluno') }}">Aluno</a>
+                <a class="aluno" href="{{ path('app_aluno') }}">Matricular Aluno</a>
+
+                <a class="aluno" href="{{ path('app_curso') }}">Cadastrar Curso</a>
+
+                <a class="aluno" href="{{ path('app_cadastro') }}">Cadastrar Aluno</a>
                 
             </ul>
         </nav>
