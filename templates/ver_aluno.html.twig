@@ -1,0 +1,31 @@
+{% block title %}{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('style/ver_aluno.css') }}">
+{% endblock %}
+
+{% block body %}
+    <table border = 1>
+        <thead>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>CPF</th>
+            <th>Escolaridade</th>
+            <th>Editar</th>
+            <th>Deletar</th>
+        </thead>
+        <tbody>
+            {% for aluno in alunos %}
+                <tr>
+                    <td>{{ aluno.NomeAluno }}</td>
+                    <td>{{ aluno.Idade }}</td>
+                    <td>{{ aluno.Cpf }}</td>
+                    <td>{{ aluno.Escolaridade }}</td>
+                    <td>Editar</td>              
+                    <td>Apagar</td>              
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
