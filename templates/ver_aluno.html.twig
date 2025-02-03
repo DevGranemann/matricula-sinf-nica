@@ -20,12 +20,31 @@
                     <td>{{ aluno.Idade }}</td>
                     <td>{{ aluno.Cpf }}</td>
                     <td>{{ aluno.Escolaridade }}</td>
-                    <td>Editar</td>              
-                    <td>Apagar</td>              
+                    <td>        
+                        {# edit button #}
+                        <a href="{{ path('edita_aluno', {'id': aluno.id}) }}" class="btn btn-warning btn-sm">Editar</a>
+
+                        {# delete button with alert confirm #}
+                        <form action="{{ path('excluir_aluno', {'id': aluno.id}) }}" method="POST" style="display: inline;" onsubmit="return confirm('Tem certeza que deseja excluir este aluno?');">
+
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ aluno.id) }}">
+
+                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                        </form>
+                    </td>
+                </tr>                 
+                {% else %}
+                <tr>
+                    <td colspan="4">Nenhum aluno cadastrado</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    <a href="{{ path('cadastro_aluno') }}" class="btn btn-cadastro">Cadastro</a>
+    <a href="{{ path('home') }}" class="btn btn-home">Home</a>
+    
 
 {% endblock %}
 

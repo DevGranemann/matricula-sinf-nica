@@ -1,0 +1,14 @@
+{% block title %}{% endblock %}
+{% block stylesheet %}{% endblock %}
+
+{% block body %}
+
+    <h1>Editar Aluno</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        <a href="{{ path('ver_aluno') }}" class="btn btn-secondary">Cancelar</a>
+    {{ form_end(form) }}
+
+{% endblock %}

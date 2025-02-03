@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class matriculaController extends AbstractController
 {
     
-    #[Route('/', name:'app_index')]
+    #[Route('/', name:'home')]
     public function index(): Response
     {
         return $this->render('home/home.html.twig', [
@@ -21,7 +21,7 @@ class matriculaController extends AbstractController
         ]);
     }
     #[Route('/aluno', name:'cadastro_aluno')]
-    public function aluno(Request $request, EntityManagerInterface $em): Response
+    public function cadastrar(Request $request, EntityManagerInterface $em): Response
     {    
 
         // criando uma nova instância de Aluno
@@ -67,6 +67,64 @@ class matriculaController extends AbstractController
         ]);
 
     }
+    #[Route('/aluno/editar/{id}', name: 'edita_aluno', methods: ['GET', 'POST'])]
+    public function editar(Request $request, EntityManagerInterface $em, int $id): Response
+    {
+        // busca o aluno pelo id
+        $aluno = $em->getRepository(Aluno::class)->find($id);
+
+        // se o aluno não existir, uma exceção
+        if (!$aluno)
+        {
+            throw $this->createNotFoundException('Aluno não encontrado');
+        }
+
+        // cria o formulário de edição
+        $form = $this->createForm(AlunoType::class, $aluno);
+
+        // processa o formulário 
+        $form->handleRequest($request);
+
+        // se o formulário for enviado e válido
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            // salva as alterações no banco
+            $em->flush();
+
+            // redireciona para a página ver_aluno
+            return $this->redirectToRoute('ver_aluno');
+        }
+
+        // renderiza o formulário de edição
+        return $this->render('edita_aluno.html.twig',  [
+            'form' => $form->createView(),
+            
+        ]);
+    }
+    #[Route('aluno/excluir/{id}', name: 'excluir_aluno', methods: ['DELETE'])]
+    public function excluir(Request $request, EntityManagerInterface $em, int $id): Response
+    {
+        // encontra o aluno pelo id
+        $aluno = $em->getRepository(Aluno::class)->find($id);
+
+        // se o aluno não existir, uma exceção
+        if (!$aluno)
+        {
+            throw $this->createNotFoundException('Aluno não encontrado');
+        }
+
+        // verifica o token CSRF para segurança
+        if ($this->isCsrfTokenValid('delete' . $aluno->id, $request->request->get('_token')))
+        // remove o aluno do banco
+        $em->remove($aluno);
+        $em->flush();
+
+
+        // redireciona para a página ver_aluno 
+        return $this->redirectToRoute('ver_aluno');
+
+    }
+
     #[Route('/curso', name:'app_curso')]
     public function curso(string $slug=null): Response
     {
