@@ -1,0 +1,16 @@
+{% block title %}{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('style/aluno.css') }}">
+{% endblock %}
+
+{% block body %}
+    <h1 class="curso-title">Cadastro de Curso</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('ver_curso') }}" class="btn btn-secondary">Ver Cursos Cadastrados</a>
+
+{% endblock %}

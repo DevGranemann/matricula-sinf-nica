@@ -53,6 +53,7 @@ class matriculaController extends AbstractController
 
 
     }
+    
     #[Route('/aluno/ver_aluno', name:'ver_aluno')]
     public function vizualizar(EntityManagerInterface $em): Response
     {
@@ -67,6 +68,7 @@ class matriculaController extends AbstractController
         ]);
 
     }
+
     #[Route('/aluno/editar/{id}', name: 'edita_aluno', methods: ['GET', 'POST'])]
     public function editar(Request $request, EntityManagerInterface $em, int $id): Response
     {
@@ -126,22 +128,4 @@ class matriculaController extends AbstractController
 
     }
 
-    #[Route('/curso', name:'app_curso')]
-    public function curso(string $slug=null): Response
-    {
-        return $this->render('curso.html.twig', [
-
-
-
-        ]);
-
-
-    }
-    #[Route('/cadastro', name:'app_cadastro')]
-    public function cadastro(): Response
-    {
-        return $this-> render('cadastro.html.twig', [
-
-        ]);
-    }
 }

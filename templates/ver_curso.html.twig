@@ -1,0 +1,30 @@
+{% block title %}{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('style/ver_aluno.css') }}">
+{% endblock %}
+
+{% block body %}
+    <table border = 1>
+        <thead>
+            <th>Nome do Curso</th>
+            <th>Carga Horária</th>
+            <th>Descrição</th>
+            <th>Área</th>
+        </thead>
+        <tbody>
+            {% for curso in cursos %}
+                <tr>
+                    <td>{{ curso.NomeCurso }}</td>
+                    <td>{{ curso.CargaHoraria }}</td>
+                    <td>{{ curso.Descricao }}</td>
+                    <td>{{ curso.Area }}</td>
+                </tr>            
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('cadastro_aluno') }}" class="btn btn-cadastro">Cadastro</a>
+    <a href="{{ path('home') }}" class="btn btn-home">Home</a>
+    
+
+{% endblock %}
