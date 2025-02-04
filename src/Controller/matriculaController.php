@@ -103,6 +103,7 @@ class matriculaController extends AbstractController
             
         ]);
     }
+    
     #[Route('aluno/excluir/{id}', name: 'excluir_aluno', methods: ['POST','DELETE'])]
     public function excluir(Request $request, EntityManagerInterface $em, int $id): Response
     {

@@ -18,6 +18,23 @@
                     <td>{{ curso.CargaHoraria }}</td>
                     <td>{{ curso.Descricao }}</td>
                     <td>{{ curso.Area }}</td>
+                    <td>
+                        {# edit button #}
+                        <a href="{{ path('edita_curso', {'id': curso.id}) }}" class="btn btn-warning btn-sm">Editar</a>
+
+                        {# delete button with alert confirm #}
+                        <form action="{{ path('excluir_curso', {'id': curso.getId()}) }}" method="POST" style="display: inline;" onsubmit="return confirm('Tem certeza que deseja excluir este curso?');">
+
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ curso.id) }}">
+
+                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4">Nenhum aluno cadastrado</td>
                 </tr>            
             {% endfor %}
         </tbody>
