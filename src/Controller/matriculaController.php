@@ -71,7 +71,7 @@ class matriculaController extends AbstractController
     public function editar(Request $request, EntityManagerInterface $em, int $id): Response
     {
         // busca o aluno pelo id
-        $aluno = $em->getRepository(Aluno::class)->find($id);
+        $aluno = $em->getRepository(aluno::class)->find($id);
 
         // se o aluno não existir, uma exceção
         if (!$aluno)
@@ -101,7 +101,7 @@ class matriculaController extends AbstractController
             
         ]);
     }
-    #[Route('aluno/excluir/{id}', name: 'excluir_aluno', methods: ['DELETE'])]
+    #[Route('aluno/excluir/{id}', name: 'excluir_aluno', methods: ['POST','DELETE'])]
     public function excluir(Request $request, EntityManagerInterface $em, int $id): Response
     {
         // encontra o aluno pelo id
@@ -114,11 +114,12 @@ class matriculaController extends AbstractController
         }
 
         // verifica o token CSRF para segurança
-        if ($this->isCsrfTokenValid('delete' . $aluno->id, $request->request->get('_token')))
-        // remove o aluno do banco
-        $em->remove($aluno);
-        $em->flush();
-
+        if ($this->isCsrfTokenValid('delete' . $aluno->getId(), $request->request->get('_token')))
+        {
+            // remove o aluno do banco
+            $em->remove($aluno);
+            $em->flush();
+        }
 
         // redireciona para a página ver_aluno 
         return $this->redirectToRoute('ver_aluno');
