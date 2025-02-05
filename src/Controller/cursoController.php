@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Aluno;
 use App\Entity\Curso;
 use App\Form\CursoType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

@@ -1,0 +1,32 @@
+{% block title %}{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('style/ver_aluno.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <table border = 1>
+        <thead>
+            <th>Número da Matrícula</th>
+            <th>Data da matrícula</th>
+            <th>Aluno</th>
+            <th>Curso</th>
+        </thead>
+        <tbody>
+            {% for matricula in matriculas %}
+                <tr>
+                    <td>{{ matricula.NumeroMatricula }}</td>
+                    <td>{{ matricula.DataMatricula | date('d/m/Y') }}</td>
+                    <td>{{ matricula.aluno.NomeAluno }}</td>
+                    <td>{{ matricula.curso.NomeCurso }}</td>
+                </tr>    
+                                    
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('matricula_aluno') }}" class="btn btn-cadastro">Cadastro</a>
+    <a href="{{ path('home') }}" class="btn btn-home">Home</a>
+
+
+{% endblock %}

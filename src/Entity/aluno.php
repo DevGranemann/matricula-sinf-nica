@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AlunoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AlunoRepository::class)]
@@ -24,6 +26,17 @@ class Aluno
 
     #[ORM\Column]
     private ?int $cpf = null;
+
+    /**
+     * @var Collection<int, Matricula>
+     */
+    #[ORM\OneToMany(targetEntity: Matricula::class, mappedBy: 'aluno')]
+    private Collection $matriculas;
+
+    public function __construct()
+    {
+        $this->matriculas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -74,6 +87,36 @@ class Aluno
     public function setCpf(int $cpf): static
     {
         $this->cpf = $cpf;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Matricula>
+     */
+    public function getMatriculas(): Collection
+    {
+        return $this->matriculas;
+    }
+
+    public function addMatricula(Matricula $matricula): static
+    {
+        if (!$this->matriculas->contains($matricula)) {
+            $this->matriculas->add($matricula);
+            $matricula->setAluno($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMatricula(Matricula $matricula): static
+    {
+        if ($this->matriculas->removeElement($matricula)) {
+            // set the owning side to null (unless already changed)
+            if ($matricula->getAluno() === $this) {
+                $matricula->setAluno(null);
+            }
+        }
 
         return $this;
     }
