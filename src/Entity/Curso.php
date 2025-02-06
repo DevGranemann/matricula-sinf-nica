@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CursoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CursoRepository::class)]
@@ -24,6 +26,17 @@ class Curso
 
     #[ORM\Column(length: 255)]
     private ?string $area = null;
+
+    /**
+     * @var Collection<int, Matricula>
+     */
+    #[ORM\OneToMany(mappedBy: "curso", targetEntity: Matricula::class, cascade: ["remove"])]
+    private Collection $matriculas;
+
+    public function __construct()
+    {
+        $this->matriculas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -74,6 +87,36 @@ class Curso
     public function setArea(string $area): static
     {
         $this->area = $area;
+
+        return $this;
+    }
+
+     /**
+     * @return Collection<int, Matricula>
+     */
+    public function getMatriculas(): Collection
+    {
+        return $this->matriculas;
+    }
+
+    public function addMatricula(Matricula $matricula): static
+    {
+        if (!$this->matriculas->contains($matricula)) {
+            $this->matriculas->add($matricula);
+            $matricula->setCurso($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMatricula(Matricula $matricula): static
+    {
+        if ($this->matriculas->removeElement($matricula)) {
+            // set the owning side to null (unless already changed)
+            if ($matricula->getAluno() === $this) {
+                $matricula->setAluno(null);
+            }
+        }
 
         return $this;
     }

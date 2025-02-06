@@ -56,4 +56,40 @@ class matriculaController extends AbstractController
         ]);
 
     }           
+
+    #[Route('/matricula/editar/{id}', name: 'edita_matricula', methods: ['GET', 'POST'])]
+    public function editar(Request $request, EntityManagerInterface $em, int $id): Response
+    {
+        // busca a matricula pelo id
+        $matricula = $em->getRepository(Matricula::class)->find($id);
+
+        // se a matricula não existir, uma exceção 
+        if (!$matricula)
+        {
+            throw $this->createNotFoundException('Matrícula não encontrada.');
+        }
+
+        // cria o formulário da edição
+        $form = $this->createForm(MatriculaType::class, $matricula);
+
+        // processa o form
+        $form->handleRequest($request);
+
+        // se o form for enviado e válido
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            // salva as alterações no banco
+            $em->flush();
+
+            // redireciona para a página ver_matricula
+            return $this->redirectToRoute('ver_matricula');
+        }
+
+        // renderiza o form de edição
+        return $this->render('edita_matricula.html.twig', [
+            'form' => $form->createView(),
+
+        ]);
+    }
+
 }

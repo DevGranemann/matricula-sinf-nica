@@ -6,6 +6,7 @@ use App\Repository\AlunoRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AlunoRepository::class)]
 class Aluno
@@ -15,22 +16,51 @@ class Aluno
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 55)]
+    #[ORM\Column(type: 'string', length: 55)]
+    #[Assert\Length(
+        min: 3,
+        max: 55,
+        exactMessage: ''
+
+    )]
     private ?string $nome_aluno = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type:'string', length: 3)]
+    #[Assert\Length(
+        min:1,
+        max: 3,
+        exactMessage: ''
+
+
+    )]
     private ?int $idade = null;
 
-    #[ORM\Column(length: 55, nullable: true)]
+    #[ORM\Column(type: 'string', length: 55, nullable: true)]
+    #[Assert\Length(
+        min: 2,
+        max: 15,
+        exactMessage: ''
+    )]
     private ?string $escolaridade = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer', length: 11, unique: true)]
+    #[Assert\NotBlank(message: '')]
+    #[Assert\Length(
+        min: 11,
+        max: 11,
+        exactMessage: ''
+
+    )]
+    #[Assert\Regex(
+        pattern: '/^\d+$/',
+        message: "Insira apenas números no CPF"
+    )]
     private ?int $cpf = null;
 
     /**
      * @var Collection<int, Matricula>
      */
-    #[ORM\OneToMany(targetEntity: Matricula::class, mappedBy: 'aluno')]
+    #[ORM\OneToMany(mappedBy: "aluno", targetEntity: Matricula::class, cascade: ["remove"])]
     private Collection $matriculas;
 
     public function __construct()
