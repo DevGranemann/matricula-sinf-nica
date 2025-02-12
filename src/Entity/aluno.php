@@ -25,10 +25,10 @@ class Aluno
     )]
     private ?string $nome_aluno = null;
 
-    #[ORM\Column(type:'string', length: 3)]
+    #[ORM\Column(type:'string', length: 2)]
     #[Assert\Length(
         min:1,
-        max: 3,
+        max: 2,
         exactMessage: ''
 
 
@@ -43,7 +43,7 @@ class Aluno
     )]
     private ?string $escolaridade = null;
 
-    #[ORM\Column(type: 'integer', length: 11, unique: true)]
+    #[ORM\Column(type: 'string', length: 11, unique: true)]
     #[Assert\NotBlank(message: '')]
     #[Assert\Length(
         min: 11,
