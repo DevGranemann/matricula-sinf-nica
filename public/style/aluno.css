@@ -1,4 +1,4 @@
-/* Estilização geral */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
@@ -7,14 +7,14 @@ body {
     text-align: center;
 }
 
-/* Estilo do título principal */
+
 h1 {
     color: #007bff;
     font-size: 28px;
     margin-bottom: 20px;
 }
 
-/* Estilo do formulário */
+
 form {
     max-width: 600px;
     margin: 0 auto;
@@ -25,7 +25,7 @@ form {
     text-align: left;
 }
 
-/* Estilo para rótulos */
+
 form label {
     display: block;
     font-weight: bold;
@@ -33,7 +33,7 @@ form label {
     color: #333;
 }
 
-/* Estilo para campos de entrada */
+
 form input[type="text"],
 form input[type="number"],
 form select {
@@ -46,7 +46,7 @@ form select {
     box-sizing: border-box;
 }
 
-/* Estilo para botão de enviar */
+
 form input[type="submit"] {
     background-color: #007bff;
     color: #ffffff;
@@ -64,7 +64,7 @@ form input[type="submit"]:hover {
     transform: scale(1.03);
 }
 
-/* Estilo para o link "Voltar ao menu inicial" */
+
 a {
     display: inline-block;
     margin-top: 20px;

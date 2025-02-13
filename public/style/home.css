@@ -1,4 +1,4 @@
-/* Estilização geral */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
@@ -7,7 +7,7 @@ body {
     text-align: center;
 }
 
-/* Estilo do cabeçalho */
+
 header {
     background-color: #007bff;
     color: #ffffff;
@@ -27,14 +27,14 @@ header p {
     font-size: 16px;
 }
 
-/* Título secundário */
+
 h2 {
     color: #0056b3;
     font-size: 20px;
     margin-bottom: 20px;
 }
 
-/* Links como botões */
+
 a {
     display: inline-block;
     text-decoration: none;
@@ -54,10 +54,11 @@ a:hover {
     transform: scale(1.05);
 }
 
-/* Espaçamento entre os botões */
+/* espaço entre buttons */
 a + a {
     margin-left: 10px;
 }
+
 ul {
     list-style: none;
     padding: 0;
